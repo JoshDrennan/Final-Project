@@ -1,23 +1,18 @@
-﻿namespace lib;
-public interface IPerson
+﻿using System.Collections;
+
+namespace lib;
+public partial class Player : IPlayer
 {
-    public string Name{get;}
-    public int Score{get; set;}
-}
-public class Person : IPerson
-{
-    public Person(string name)
+    public Player(string name)
     {
-        Person player = new Person(name);
+        
     }
+
     public string Name => Name;
 
+    public int score = 0;
     public int Score 
     { 
-        get => Score; 
-        set
-        {
-            Score = value;
-        }
+        get => score; 
     }
 }

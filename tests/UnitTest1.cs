@@ -4,7 +4,7 @@ namespace lib;
 
 public class Tests
 {
-    
+    //public Person TestPerson = new Person("josh");
 
     [SetUp]
     public void Setup()
