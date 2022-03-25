@@ -1,18 +1,27 @@
 ﻿using System.Collections;
 
 namespace lib;
-public partial class Player : IPlayer
+public class Player : IPlayer
 {
-    public Player(string name)
+    string name;
+
+
+    public Player(string Name)
     {
-        
+        this.name = Name;
     }
 
-    public string Name => Name;
-
+    public string Name
+    {
+        get
+        {
+            return name;
+        }
+    }
     public int score = 0;
-    public int Score 
-    { 
-        get => score; 
+    public int Score
+    {
+        get => score;
     }
+
 }
