@@ -18,11 +18,12 @@ public class Game
         this.length = Length;
     }
 
-    public async void Add(string v)
+    public void Add(string v)
     {
+        
         try
         {
-            Player player = new Player($"{v}");
+            var player = new Player($"{v}");
             for(int i = 0; i <= Players.Capacity; i++)
             {
                 Players[i] = player;
