@@ -3,6 +3,12 @@ namespace lib;
 
 public class Frames
 {
-    int[] frames = new int[10];
-      
+    public int[] frames = new int[10];
+
+    public int[] GetArray()
+    {
+        return frames;
+    }
+
 }
+

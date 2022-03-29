@@ -2,38 +2,20 @@ namespace lib;
 
 public class Game
 {
-    int length = 0;
-    public int Length
-    {
-        get
-        {
-            return length;
-        }
-    }
+    public int Length { get; }
 
-    List<IPlayer> Players { get; set; }
-    public Game(int Length)
-    {
-        Players = new List<IPlayer>();
-        this.length = Length;
-    }
+    public List<IPlayer> PlayersList { get; set; }
 
-    public void Add(string v)
+    public Game(int length, Player player)
     {
-        
-        try
-        {
-            var player = new Player($"{v}");
-            for(int i = 0; i <= Players.Capacity; i++)
-            {
-                Players[i] = player;
-                length++;
-            }
-        }
-        catch
-        {
-            throw new NotImplementedException();
-        }
+        PlayersList = new List<IPlayer>();
+        Length = length;
+        PlayersList.Add(player);
+    }
+    public List<IPlayer> GetList()
+    {
+
+        return PlayersList;
 
     }
 }

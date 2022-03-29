@@ -9,7 +9,7 @@ class Gutterball : Throws
 {
     public override int score()
     {
-        throw new NotImplementedException();
+        return 0;
     }
 }
 

@@ -3,25 +3,22 @@
 namespace lib;
 public class Player : IPlayer
 {
-    string name;
-
-
-    public Player(string Name)
+    public int Score { get; }
+    public string Name { get; }
+    public Player(string name)
     {
-        this.name = Name;
+        Name = name;
     }
 
-    public string Name
+    public Player(string name, int score) : this(name)
     {
-        get
-        {
-            return name;
-        }
+        Score = score;
     }
-    public int score = 0;
-    public int Score
+
+    public override string ToString()
     {
-        get => score;
+        return Name;
     }
+
 
 }
