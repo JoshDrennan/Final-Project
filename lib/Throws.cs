@@ -48,4 +48,3 @@ class regular : Throws
         }
     }
     */
-

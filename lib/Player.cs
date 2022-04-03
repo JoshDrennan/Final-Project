@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace lib;
+﻿namespace lib;
 public class Player : IPlayer
 {
     public int Score { get; }
@@ -14,7 +12,7 @@ public class Player : IPlayer
     {
         Score = score;
     }
-
+    
     public override string ToString()
     {
         return Name;

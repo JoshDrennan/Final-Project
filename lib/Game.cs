@@ -1,21 +1,16 @@
-namespace lib;
+// namespace lib;
 
-public class Game
-{
-    public int Length { get; }
+// public class Game
+// {
 
-    public List<IPlayer> PlayersList { get; set; }
+//     public int Length { get; }
 
-    public Game(int length, Player player)
-    {
-        PlayersList = new List<IPlayer>();
-        Length = length;
-        PlayersList.Add(player);
-    }
-    public List<IPlayer> GetList()
-    {
+//     public List<IPlayer> PlayersList { get; set; }
 
-        return PlayersList;
-
-    }
-}
+//     public Game(int length, Player player)
+//     {
+//         PlayersList = new List<IPlayer>();
+//         Length = length;
+//         PlayersList.Add(player);
+//     }
+// }

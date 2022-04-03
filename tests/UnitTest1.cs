@@ -28,10 +28,31 @@ public class Tests
     }
 
     [Test]
-    public void Test3()
+    public void TestPlayerCountInList()
     {
         Player TestPlayer2 = new Player("Josh");
         TestPlayer.Add(TestPlayer2);
         Assert.AreEqual(2, TestPlayer.Count);
+    }
+
+    [Test]
+    public void TestFramesArrayLength()
+    {
+        Frames testFrames = new Frames();
+        Assert.AreEqual(10, testFrames.frames.Length);
+    }
+
+    [Test]
+    public void TestWhatIsInFramesArray()
+    {
+        Frames testFrames2 = new Frames();
+        Assert.AreEqual(0, testFrames2.frames[0]);
+    }
+
+    [Test]
+    public void TestTotalScore()
+    {
+        Frames testFrames3 = new Frames();
+        Assert.AreEqual(0, testFrames3.TotalScore);
     }
 }
