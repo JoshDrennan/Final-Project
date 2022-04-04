@@ -22,9 +22,4 @@ public class Frames
         }
         return TotalScore;
     }
-
-    void appendFramesArray()
-    {
-        
-    }
 }

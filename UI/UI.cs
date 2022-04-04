@@ -12,10 +12,10 @@ public class Program
 
     private static void GameLoop()
     {
-        
+
     }
 
-    static async void AddPlayers(List<IPlayer> PlayersList)
+    static void AddPlayers(List<IPlayer> PlayersList)
     {
         bool Loop = true;
         while (Loop == true)

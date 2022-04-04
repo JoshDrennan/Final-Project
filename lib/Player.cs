@@ -12,11 +12,9 @@ public class Player : IPlayer
     {
         Score = score;
     }
-    
+
     public override string ToString()
     {
         return Name;
     }
-
-
 }
