@@ -1,7 +1,7 @@
 ﻿namespace lib;
 public class Player : IPlayer
 {
-    public int Score { get; }
+    public int Score { get; set; }
     public string Name { get; }
     public Player(string name)
     {

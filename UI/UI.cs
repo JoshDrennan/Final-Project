@@ -7,12 +7,47 @@ public class Program
         List<IPlayer> PlayersList = new List<IPlayer>();
         Console.WriteLine("Welcome to the bowling game scorekeeper.");
         AddPlayers(PlayersList);
-        GameLoop();
+        GameLoop(PlayersList);
     }
 
-    private static void GameLoop()
+    private static void GameLoop(List<IPlayer> PlayersList)
     {
+        Frames rounds = new Frames();
+        int round = 1;
+        int roll1;
+        int roll2;
+        for (int i = 0; i <= rounds.frames.Length; i++)
+        {
+            foreach (var p in PlayersList)
+            {
+                Console.WriteLine($"it is round {round}");
+                Console.WriteLine();
+                Console.WriteLine("What is the score of your first roll");
+                roll1 = Convert.ToInt32(Console.ReadLine());
+                roll2 = Convert.ToInt32(Console.ReadLine());
+                p.Score = CalculateScore(roll1, roll2);
+            }
 
+            round++;
+        }
+    }
+
+    public void CalculateScore(int roll1, int roll2)
+    {
+        if (roll1 < 10 && roll1 + roll2 < 10)
+        {
+            //score = score + roll1 + roll2;
+        }
+
+        if (roll1 == 10)
+        {
+            //Strike(roll1, roll2);
+        }
+
+        if (roll1 + roll2 == 10)
+        {
+            //Spare(roll1, roll2);
+        }
     }
 
     static void AddPlayers(List<IPlayer> PlayersList)
