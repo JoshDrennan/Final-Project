@@ -20,34 +20,86 @@ public class Program
         {
             foreach (var p in PlayersList)
             {
-                Console.WriteLine($"it is round {round}");
-                Console.WriteLine();
-                Console.WriteLine("What is the score of your first roll");
-                roll1 = Convert.ToInt32(Console.ReadLine());
-                roll2 = Convert.ToInt32(Console.ReadLine());
-                p.Score = CalculateScore(roll1, roll2);
+                while (true)
+                {
+                    Console.WriteLine($"it is round {round}");
+                    Console.WriteLine();
+                    Console.WriteLine("What is the score of your first roll");
+                    roll1 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("What is the score of your second roll");
+                    roll2 = Convert.ToInt32(Console.ReadLine());
+                    if (roll1 <= 10 && roll1 >= 0 && roll2 <= 10 && roll2 >= 0)
+                    {
+                        p.Score = CalculateScore(roll1, roll2);
+                        p.PreviousThrow = SetPreviousThrow(roll1, roll2);
+                    }
+                    else
+                    {
+                        throw new InvalidThrowException();
+                    }
+
+                }
             }
 
             round++;
         }
     }
 
-    public void CalculateScore(int roll1, int roll2)
+    public Throws SetPreviousThrow(int roll1, int roll2)
     {
+
         if (roll1 < 10 && roll1 + roll2 < 10)
         {
-            //score = score + roll1 + roll2;
+            Throws regularRound = new Regular();
+            return regularRound;
         }
 
-        if (roll1 == 10)
+        else if (roll1 == 10)
         {
-            //Strike(roll1, roll2);
+            Throws strike = new Strike();
+            return strike;
         }
 
-        if (roll1 + roll2 == 10)
+        else if (roll1 + roll2 == 10)
         {
-            //Spare(roll1, roll2);
+            Throws spare = new Spare();
+            return spare;
         }
+        else
+        {
+            Console.WriteLine("This was an invalid throw");
+            Throws invalidThow = new InvalidThow();
+            return invalidThow;
+        }
+
+    }
+
+    public int CalculateScore(int roll1, int roll2)
+    {
+        int calculatedScore;
+
+        if (roll1 < 10 && roll1 + roll2 < 10)
+        {
+            calculatedScore = roll1 + roll2;
+            return calculatedScore;
+        }
+
+        else if (roll1 == 10)
+        {
+            calculatedScore = 10;
+            return calculatedScore;
+        }
+
+        else if (roll1 + roll2 == 10)
+        {
+            calculatedScore = 10;
+            return calculatedScore;
+        }
+        else
+        {
+            return 0;
+        }
+
     }
 
     static void AddPlayers(List<IPlayer> PlayersList)

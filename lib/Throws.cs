@@ -5,7 +5,7 @@ public abstract class Throws
     public abstract int score();
 }
 
-class Gutterball : Throws
+public class Gutterball : Throws
 {
     public override int score()
     {
@@ -13,7 +13,20 @@ class Gutterball : Throws
     }
 }
 
-class Strike : Throws
+public class Strike : Throws
+{
+    public override int score()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void CalculateStrike()
+    {
+
+    }
+}
+
+public class Regular : Throws
 {
     public override int score()
     {
@@ -21,10 +34,18 @@ class Strike : Throws
     }
 }
 
-class regular : Throws
+public class Spare : Throws
 {
     public override int score()
     {
         throw new NotImplementedException();
+    }
+}
+
+public class InvalidThow : Throws
+{
+    public override int score()
+    {
+        return 0;
     }
 }
