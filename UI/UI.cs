@@ -1,5 +1,7 @@
 ﻿namespace lib;
 
+public delegate int MyDelegate(int x, int y);
+public delegate Throws MyDelegate2(int x, int y);
 public class Program
 {
     public static void Main()
@@ -16,6 +18,8 @@ public class Program
         int round = 1;
         int roll1;
         int roll2;
+        MyDelegate Del1 = new MyDelegate(Program.CalculateScore);
+        MyDelegate2 Del2 = new MyDelegate2(Program.SetPreviousThrow);
         for (int i = 0; i <= rounds.frames.Length; i++)
         {
             foreach (var p in PlayersList)
@@ -28,16 +32,17 @@ public class Program
                     roll1 = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("What is the score of your second roll");
                     roll2 = Convert.ToInt32(Console.ReadLine());
+                    
                     if (roll1 <= 10 && roll1 >= 0 && roll2 <= 10 && roll2 >= 0)
                     {
-                        p.Score = CalculateScore(roll1, roll2);
-                        p.PreviousThrow = SetPreviousThrow(roll1, roll2);
+                        p.Score = Del1(roll1, roll2);
+                        p.PreviousThrow = Del2(roll1, roll2);
                     }
                     else
                     {
                         throw new InvalidThrowException();
                     }
-
+                    round++;
                 }
             }
 
