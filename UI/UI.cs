@@ -14,6 +14,7 @@ public class Program
 
     private static void GameLoop(List<IPlayer> PlayersList)
     {
+        bool loop = true;
         Frames rounds = new Frames();
         int round = 1;
         int roll1;
@@ -22,35 +23,39 @@ public class Program
         MyDelegate2 Del2 = new MyDelegate2(Program.SetPreviousThrow);
         for (int i = 0; i <= rounds.frames.Length; i++)
         {
+            Console.WriteLine($"it is round {round}");
             foreach (var p in PlayersList)
             {
-                while (true)
+                while (loop == true)
                 {
-                    Console.WriteLine($"it is round {round}");
+                    Console.WriteLine($"{p} it is your turn");
                     Console.WriteLine();
                     Console.WriteLine("What is the score of your first roll");
                     roll1 = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("What is the score of your second roll");
                     roll2 = Convert.ToInt32(Console.ReadLine());
-                    
+
                     if (roll1 <= 10 && roll1 >= 0 && roll2 <= 10 && roll2 >= 0)
                     {
-                        p.Score = Del1(roll1, roll2);
-                        p.PreviousThrow = Del2(roll1, roll2);
+                        p.Score = p.Score + Del1(roll1, roll2);
+                        p.TwoRoundsAgoResult = p.PreviousRoundResult;
+                        p.PreviousRoundResult = Del2(roll1, roll2);
+                        loop = false;
                     }
                     else
                     {
-                        throw new InvalidThrowException();
+                        Console.WriteLine("Your Inputs were invalid try again");
                     }
-                    round++;
+                    Console.WriteLine($"your current score is {p.Score}");
                 }
-            }
 
+                loop = true;
+            }
             round++;
         }
     }
 
-    public Throws SetPreviousThrow(int roll1, int roll2)
+    public static Throws SetPreviousThrow(int roll1, int roll2)
     {
 
         if (roll1 < 10 && roll1 + roll2 < 10)
@@ -76,10 +81,9 @@ public class Program
             Throws invalidThow = new InvalidThow();
             return invalidThow;
         }
-
     }
 
-    public int CalculateScore(int roll1, int roll2)
+    public static int CalculateScore(int roll1, int roll2)
     {
         int calculatedScore;
 
@@ -107,7 +111,7 @@ public class Program
 
     }
 
-    static void AddPlayers(List<IPlayer> PlayersList)
+    public static void AddPlayers(List<IPlayer> PlayersList)
     {
         bool Loop = true;
         while (Loop == true)
