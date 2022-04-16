@@ -1,51 +1,40 @@
 namespace lib;
 
+public enum TypesOfThrows
+{
+    Regular,
+    Gutterball,
+    Strike,
+    Spare,
+    InvalidThow
+}
 public abstract class Throws
 {
-    public abstract int score();
+    public abstract TypesOfThrows TypeOfThrow {get;}
 }
 
 public class Gutterball : Throws
 {
-    public override int score()
-    {
-        return 0;
-    }
+    public override TypesOfThrows TypeOfThrow => TypesOfThrows.Gutterball;
 }
 
 public class Strike : Throws
 {
-    public override int score()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void CalculateStrike()
-    {
-
-    }
+    public override TypesOfThrows TypeOfThrow => TypesOfThrows.Strike;
 }
 
 public class Regular : Throws
 {
-    public override int score()
-    {
-        throw new NotImplementedException();
-    }
+    public override TypesOfThrows TypeOfThrow => TypesOfThrows.Regular;
 }
 
 public class Spare : Throws
 {
-    public override int score()
-    {
-        throw new NotImplementedException();
-    }
+    public override TypesOfThrows TypeOfThrow => TypesOfThrows.Spare;
 }
 
 public class InvalidThow : Throws
 {
-    public override int score()
-    {
-        return 0;
-    }
+    public override TypesOfThrows TypeOfThrow => TypesOfThrows.InvalidThow;
 }
+

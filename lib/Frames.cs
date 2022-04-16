@@ -14,12 +14,4 @@ public class Frames
         }
     }
 
-    public int getTotalScore()
-    {
-        for (int j = 0; j <= 10; j++)
-        {
-            TotalScore += frames[j];
-        }
-        return TotalScore;
-    }
 }

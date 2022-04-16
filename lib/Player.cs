@@ -3,7 +3,8 @@ public class Player : IPlayer
 {
     public int Score { get; set; }
     public string Name { get; }
-    public Throws PreviousThrow { get; set; }
+    public TypesOfThrows PreviousRoundResult { get; set; }
+    public TypesOfThrows TwoRoundsAgoResult { get; set; }
 
     public Player(string name)
     {
@@ -15,13 +16,14 @@ public class Player : IPlayer
         Score = score;
     }
 
-    public Player(string name, int score, Throws previousThrow) : this(name, score)
+    public Player(string name, int score, TypesOfThrows previousThrow) : this(name, score)
     {
-        PreviousThrow = previousThrow;
+        PreviousRoundResult = previousThrow;
     }
 
-    public override string ToString()
+    public Player(string name, int score, TypesOfThrows previousThrow, TypesOfThrows twoRoundsAgoResult) : this(name, score, previousThrow)
     {
-        return Name;
+        TwoRoundsAgoResult = twoRoundsAgoResult;
     }
+
 }

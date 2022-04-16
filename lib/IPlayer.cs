@@ -6,5 +6,6 @@ public interface IPlayer
 
     public int Score { get; set; }
 
-    public Throws PreviousThrow { get; set; }
+    public TypesOfThrows PreviousRoundResult { get; set; }
+    public TypesOfThrows TwoRoundsAgoResult { get; set; }
 }

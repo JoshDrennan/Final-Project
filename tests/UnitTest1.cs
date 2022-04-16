@@ -50,9 +50,8 @@ public class Tests
     }
 
     [Test]
-    public void TestTotalScore()
+    public void TestCalculateScore()
     {
-        Frames testFrames3 = new Frames();
-        Assert.AreEqual(0, testFrames3.TotalScore);
+        
     }
 }
