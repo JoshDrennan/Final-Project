@@ -31,7 +31,7 @@ public class Tests
     public void TestPlayerCountInList()
     {
         Player TestPlayer2 = new Player("Josh");
-        //TestPlayer.Add(TestPlayer2);
+        TestPlayer.Add(TestPlayer2);
         Assert.AreEqual(2, TestPlayer.Count);
     }
 
