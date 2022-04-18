@@ -47,4 +47,10 @@ public class Tests
     {
         Assert.AreEqual(6, GameLogic.CalculateScore(3, 3));
     }
+
+    [Test]
+    public void TestCalculatePreviousStrikesOrSpares()
+    {
+        Assert.AreEqual(10, GameLogic.CalculatePreviousStrikeOrSpare(3, 5, TypesOfThrows.Strike, TypesOfThrows.Strike));
+    }
 }
