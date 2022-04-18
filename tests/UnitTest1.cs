@@ -23,7 +23,7 @@ public class Tests
     public void Test2()
     {
         Player TestPlayer1 = new Player("Brad");
-        //TestPlayer.Add(TestPlayer1);
+        TestPlayer.Add(TestPlayer1);
         Assert.AreEqual(1, TestPlayer.Count);
     }
 
