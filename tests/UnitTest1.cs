@@ -51,6 +51,6 @@ public class Tests
     [Test]
     public void TestCalculatePreviousStrikesOrSpares()
     {
-        Assert.AreEqual(10, GameLogic.CalculatePreviousStrikeOrSpare(3, 5, TypesOfThrows.Strike, TypesOfThrows.Strike));
+        Assert.AreEqual(11, GameLogic.CalculatePreviousStrikeOrSpare(3, 5, TypesOfThrows.Strike, TypesOfThrows.Strike));
     }
 }
