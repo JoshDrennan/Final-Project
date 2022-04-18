@@ -4,7 +4,7 @@ namespace lib;
 public class Frames
 {
     public int TotalScore = 0;
-    public int[] frames = new int[7];
+    public int[] frames = new int[10];
 
     void FillArray()
     {
