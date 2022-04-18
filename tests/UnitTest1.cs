@@ -42,16 +42,9 @@ public class Tests
         Assert.AreEqual(10, testFrames.frames.Length);
     }
 
-    // [Test]
-    // public void TestWhatIsInFramesArray()
-    // {
-    //     Frames testFrames2 = new Frames();
-    //     Assert.AreEqual(0, testFrames2.frames[0]);
-    // }
-
-    // [Test]
-    // public void TestCalculateScore()
-    // {
-    //     Assert.AreEqual(6, GameLogic.CalculateScore(3, 3));
-    // }
+    [Test]
+    public void TestCalculateScore()
+    {
+        Assert.AreEqual(6, GameLogic.CalculateScore(0, 3));
+    }
 }
