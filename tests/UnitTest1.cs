@@ -35,12 +35,12 @@ public class Tests
         Assert.AreEqual(2, TestPlayer.Count);
     }
 
-    // [Test]
-    // public void TestFramesArrayLength()
-    // {
-    //     Frames testFrames = new Frames();
-    //     Assert.AreEqual(10, testFrames.frames.Length);
-    // }
+    [Test]
+    public void TestFramesArrayLength()
+    {
+        Frames testFrames = new Frames();
+        Assert.AreEqual(10, testFrames.frames.Length);
+    }
 
     // [Test]
     // public void TestWhatIsInFramesArray()
