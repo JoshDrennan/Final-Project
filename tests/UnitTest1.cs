@@ -45,6 +45,6 @@ public class Tests
     [Test]
     public void TestCalculateScore()
     {
-        Assert.AreEqual(6, GameLogic.CalculateScore(0, 3));
+        Assert.AreEqual(6, GameLogic.CalculateScore(3, 3));
     }
 }
