@@ -27,13 +27,13 @@ public class Tests
         Assert.AreEqual(1, TestPlayer.Count);
     }
 
-    // [Test]
-    // public void TestPlayerCountInList()
-    // {
-    //     Player TestPlayer2 = new Player("Josh");
-    //     TestPlayer.Add(TestPlayer2);
-    //     Assert.AreEqual(2, TestPlayer.Count);
-    // }
+    [Test]
+    public void TestPlayerCountInList()
+    {
+        Player TestPlayer2 = new Player("Josh");
+        //TestPlayer.Add(TestPlayer2);
+        Assert.AreEqual(2, TestPlayer.Count);
+    }
 
     // [Test]
     // public void TestFramesArrayLength()
