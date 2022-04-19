@@ -30,7 +30,7 @@ public class Program
                     Console.WriteLine($"{p.Name} it is your turn");
                     Console.WriteLine();
                     Console.WriteLine("What is the score of your first roll");
-                    roll1 = Convert.ToInt32(Console.ReadLine());
+                    roll1 = GetRollScore();
                     if (roll1 == 10)
                     {
                         roll2 = 0;
@@ -38,20 +38,14 @@ public class Program
                     else
                     {
                         Console.WriteLine("What is the score of your second roll");
-                        roll2 = Convert.ToInt32(Console.ReadLine());
+                        roll2 = GetRollScore();
                     }
 
-                    if (roll1 <= 10 && roll1 >= 0 && roll2 <= 10 && roll2 >= 0)
-                    {
-                        p.Score = p.Score + Del1(roll1, roll2) + Del3(roll1, roll2, p.PreviousRoundResult, p.TwoRoundsAgoResult);
-                        p.TwoRoundsAgoResult = p.PreviousRoundResult;
-                        p.PreviousRoundResult = Del2(roll1, roll2);
-                        loop = false;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Your Inputs were invalid try again");
-                    }
+                    p.Score = p.Score + Del1(roll1, roll2) + Del3(roll1, roll2, p.PreviousRoundResult, p.TwoRoundsAgoResult);
+                    p.TwoRoundsAgoResult = p.PreviousRoundResult;
+                    p.PreviousRoundResult = Del2(roll1, roll2);
+                    loop = false;
+
                     Console.WriteLine($"your current score is {p.Score}");
                 }
 
@@ -60,7 +54,23 @@ public class Program
             round++;
         }
     }
-    
+
+    public static int GetRollScore()
+    {
+        int UserInput;
+        while (true)
+        {
+            UserInput = Convert.ToInt32(Console.ReadLine());
+            if (UserInput <= 10 && UserInput >= 1)
+            {
+                return UserInput;
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input roll score must be between 1 and 10 try again");
+            }
+        }
+    }
     public static void AddPlayers(List<IPlayer> PlayersList)
     {
         bool Loop = true;
