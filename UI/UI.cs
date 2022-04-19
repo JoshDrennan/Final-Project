@@ -8,6 +8,7 @@ public class Program
         Console.WriteLine("Welcome to the bowling game scorekeeper.");
         AddPlayers(PlayersList);
         GameLoop(PlayersList);
+        EndOfgame(PlayersList);
     }
 
     private static void GameLoop(List<IPlayer> PlayersList)
@@ -41,33 +42,84 @@ public class Program
                         roll2 = GetRollScore();
                     }
 
+                    if (round == 10)
+                    {
+                        if (roll1 == 10 || roll1 + roll2 == 10)
+                        {
+                            p.Score = p.Score + FinalRound(roll1, roll2);
+                        }
+                    }
                     p.Score = p.Score + Del1(roll1, roll2) + Del3(roll1, roll2, p.PreviousRoundResult, p.TwoRoundsAgoResult);
                     p.TwoRoundsAgoResult = p.PreviousRoundResult;
                     p.PreviousRoundResult = Del2(roll1, roll2);
                     loop = false;
 
                     Console.WriteLine($"your current score is {p.Score}");
+
+                    
                 }
 
                 loop = true;
             }
             round++;
         }
+        
     }
 
+    private static void EndOfgame(List<IPlayer> PlayersList)
+    {
+        Console.WriteLine("You finished the game!");
+        Console.WriteLine("The final scores are:");
+        foreach (var p in PlayersList)
+        {
+            Console.WriteLine($"{p.Name}: {p.Score}");
+        }
+    }
+
+    public static int FinalRound(int roll1, int roll2)
+    {
+        int FinalRoundStrikeOrSpareAddedRollsScore = 0;
+        int addedRoll1;
+        int addedRoll2;
+        if (roll1 == 10)
+        {
+            Console.WriteLine("You rolled a strike on the final round.");
+            Console.WriteLine("You get two more rolls");
+            Console.WriteLine("What is the score of your first added roll");
+            addedRoll1 = GetRollScore();
+            Console.WriteLine("What is the score of your second added roll");
+            addedRoll2 = GetRollScore();
+            if (addedRoll1 == 10)
+            {
+                FinalRoundStrikeOrSpareAddedRollsScore = addedRoll1 + addedRoll2 + addedRoll2;
+            }
+            else
+            {
+                FinalRoundStrikeOrSpareAddedRollsScore = addedRoll1 + addedRoll2;
+            }
+        }
+        else if (roll1 + roll2 == 10)
+        {
+            Console.WriteLine("You rolled a spare on the final round.");
+            Console.WriteLine("You get one more roll");
+            Console.WriteLine("What is the score of your roll");
+            addedRoll1 = GetRollScore();
+        }
+        return FinalRoundStrikeOrSpareAddedRollsScore;
+    }
     public static int GetRollScore()
     {
         int UserInput;
         while (true)
         {
             UserInput = Convert.ToInt32(Console.ReadLine());
-            if (UserInput <= 10 && UserInput >= 1)
+            if (UserInput <= 10 && UserInput >= 0)
             {
                 return UserInput;
             }
             else
             {
-                Console.WriteLine("Invalid Input roll score must be between 1 and 10 try again");
+                Console.WriteLine("Invalid Input roll score must be between 0 and 10 try again");
             }
         }
     }
