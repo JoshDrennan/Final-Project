@@ -74,6 +74,20 @@ public class Program
         {
             Console.WriteLine($"{p.Name}: {p.Score}");
         }
+
+        Console.WriteLine("would you like to save your names to play again? if so enter Y");
+        string UserInput = Console.ReadLine();
+        if (UserInput == "Y")
+        {
+            GameLogic.SavePlayers(PlayersList);
+            PlayersList.Clear();
+            Console.WriteLine("Thank you for playing. Your names have been saved. Load them next time you play");
+        }
+        else
+        {
+            Console.WriteLine("Your names won't be saved. Thanks for playing");
+            
+        }
     }
 
     public static int FinalRound(int roll1, int roll2)
@@ -128,7 +142,7 @@ public class Program
         bool Loop = true;
         while (Loop == true)
         {
-            Console.WriteLine("Press A to add players, press D to move on, or press P to print the list of players");
+            Console.WriteLine("Press A to add players, press D to move on, press P to print the list of players, or press L to load names from last rounds");
             string userInput = Console.ReadLine();
             if (userInput == "A")
             {
@@ -146,10 +160,17 @@ public class Program
                     Console.WriteLine(PlayersList[i].Name);
                 }
             }
+            else if (userInput == "L")
+            {
+                PlayerFactory player = new PlayerFactory();
+                GameLogic.LoadAccounts(PlayersList);
+            }
             else
             {
                 Console.WriteLine("Invalid input try again.");
             }
         }
     }
+
+    
 }
