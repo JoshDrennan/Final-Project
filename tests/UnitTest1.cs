@@ -45,12 +45,25 @@ public class Tests
     [Test]
     public void TestCalculateScore()
     {
-        Assert.AreEqual(6, GameLogic.CalculateScore(3, 3));
+        GameLogic gameLogic = new GameLogic();
+        Assert.AreEqual(6, gameLogic.CalculateScore(3, 3));
     }
 
     [Test]
     public void TestCalculatePreviousStrikesOrSpares()
     {
-        Assert.AreEqual(11, GameLogic.CalculatePreviousStrikeOrSpare(3, 5, TypesOfThrows.Strike, TypesOfThrows.Strike));
+        GameLogic gameLogic = new GameLogic();
+        Assert.AreEqual(11, gameLogic.CalculatePreviousStrikeOrSpare(3, 5, TypesOfThrows.Strike, TypesOfThrows.Strike));
     }
+
+    // [Test]
+    // public void TestSavePlayers()
+    // {
+    //     Player TestPlayer3 = new Player("josh");
+    //     Player TestPlayer4 = new Player("Brad");
+    //     GameLogic gameLogic = new GameLogic();
+    //     TestPlayer.Clear();
+    //     TestPlayer.Add(TestPlayer3);
+    //     TestPlayer.Add(TestPlayer4);
+    // }
 }

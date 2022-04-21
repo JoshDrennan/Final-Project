@@ -4,33 +4,36 @@ public class Program
 {
     public static void Main()
     {
+        GameLogic gameLogic = new GameLogic();
         List<IPlayer> PlayersList = new List<IPlayer>();
         Console.WriteLine("Welcome to the bowling game scorekeeper.");
-        AddPlayers(PlayersList);
-        GameLoop(PlayersList);
-        EndOfgame(PlayersList);
+        Console.WriteLine();
+        AddPlayers(PlayersList, gameLogic);
+        GameLoop(PlayersList, gameLogic);
+        EndOfgame(PlayersList, gameLogic);
     }
 
-    private static void GameLoop(List<IPlayer> PlayersList)
+    private static void GameLoop(List<IPlayer> PlayersList, GameLogic gameLogic)
     {
         bool loop = true;
         Frames rounds = new Frames();
         int round = 1;
         int roll1;
         int roll2;
-        MyDelegate Del1 = new MyDelegate(GameLogic.CalculateScore);
-        MyDelegate2 Del2 = new MyDelegate2(GameLogic.SetPreviousThrow);
-        MyDelegate3 Del3 = new MyDelegate3(GameLogic.CalculatePreviousStrikeOrSpare);
+        MyDelegate Del1 = new MyDelegate(gameLogic.CalculateScore);
+        MyDelegate2 Del2 = new MyDelegate2(gameLogic.SetPreviousThrow);
+        MyDelegate3 Del3 = new MyDelegate3(gameLogic.CalculatePreviousStrikeOrSpare);
         for (int i = 0; i < rounds.frames.Length; i++)
         {
             Console.WriteLine($"it is round {round}");
+            Console.WriteLine();
             foreach (var p in PlayersList)
             {
                 while (loop == true)
                 {
                     Console.WriteLine($"{p.Name} it is your turn");
-                    Console.WriteLine();
                     Console.WriteLine("What is the score of your first roll");
+                    Console.WriteLine();
                     roll1 = GetRollScore();
                     if (roll1 == 10)
                     {
@@ -39,6 +42,7 @@ public class Program
                     else
                     {
                         Console.WriteLine("What is the score of your second roll");
+                        Console.WriteLine();
                         roll2 = GetRollScore();
                     }
 
@@ -55,8 +59,7 @@ public class Program
                     loop = false;
 
                     Console.WriteLine($"your current score is {p.Score}");
-
-                    
+                    Console.WriteLine();
                 }
 
                 loop = true;
@@ -66,27 +69,31 @@ public class Program
         
     }
 
-    private static void EndOfgame(List<IPlayer> PlayersList)
+    private static void EndOfgame(List<IPlayer> PlayersList, GameLogic gameLogic)
     {
         Console.WriteLine("You finished the game!");
         Console.WriteLine("The final scores are:");
+        Console.WriteLine();
         foreach (var p in PlayersList)
         {
             Console.WriteLine($"{p.Name}: {p.Score}");
         }
 
         Console.WriteLine("would you like to save your names to play again? if so enter Y");
+        Console.WriteLine();
         string UserInput = Console.ReadLine();
         if (UserInput == "Y")
         {
-            GameLogic.SavePlayers(PlayersList);
+            gameLogic.SavePlayers(PlayersList);
             PlayersList.Clear();
             Console.WriteLine("Thank you for playing. Your names have been saved. Load them next time you play");
+            Console.WriteLine();
         }
         else
         {
             Console.WriteLine("Your names won't be saved. Thanks for playing");
-            
+            Console.WriteLine();
+
         }
     }
 
@@ -100,8 +107,10 @@ public class Program
             Console.WriteLine("You rolled a strike on the final round.");
             Console.WriteLine("You get two more rolls");
             Console.WriteLine("What is the score of your first added roll");
+            Console.WriteLine();
             addedRoll1 = GetRollScore();
             Console.WriteLine("What is the score of your second added roll");
+            Console.WriteLine();
             addedRoll2 = GetRollScore();
             if (addedRoll1 == 10)
             {
@@ -117,6 +126,7 @@ public class Program
             Console.WriteLine("You rolled a spare on the final round.");
             Console.WriteLine("You get one more roll");
             Console.WriteLine("What is the score of your roll");
+            Console.WriteLine();
             addedRoll1 = GetRollScore();
         }
         return FinalRoundStrikeOrSpareAddedRollsScore;
@@ -134,15 +144,17 @@ public class Program
             else
             {
                 Console.WriteLine("Invalid Input roll score must be between 0 and 10 try again");
+                Console.WriteLine();
             }
         }
     }
-    public static void AddPlayers(List<IPlayer> PlayersList)
+    public static void AddPlayers(List<IPlayer> PlayersList, GameLogic gameLogic)
     {
         bool Loop = true;
         while (Loop == true)
         {
             Console.WriteLine("Press A to add players, press D to move on, press P to print the list of players, or press L to load names from last rounds");
+            Console.WriteLine();
             string userInput = Console.ReadLine();
             if (userInput == "A")
             {
@@ -163,11 +175,12 @@ public class Program
             else if (userInput == "L")
             {
                 PlayerFactory player = new PlayerFactory();
-                GameLogic.LoadAccounts(PlayersList);
+                gameLogic.LoadAccounts(PlayersList);
             }
             else
             {
                 Console.WriteLine("Invalid input try again.");
+                Console.WriteLine();
             }
         }
     }

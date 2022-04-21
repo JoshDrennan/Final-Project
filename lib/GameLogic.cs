@@ -4,13 +4,13 @@ namespace lib;
 public delegate int MyDelegate(int x, int y);
 public delegate TypesOfThrows MyDelegate2(int x, int y);
 public delegate int MyDelegate3(int w, int x, TypesOfThrows y, TypesOfThrows z);
-public class GameLogic
+public class GameLogic : IGameLogic
 {
     public GameLogic()
     {
 
     }
-    public static int CalculateScore(int roll1, int roll2)
+    public int CalculateScore(int roll1, int roll2)
     {
         int calculatedScore;
 
@@ -38,7 +38,7 @@ public class GameLogic
 
     }
 
-    public static int CalculatePreviousStrikeOrSpare(int roll1, int roll2, TypesOfThrows previousRoundResult, TypesOfThrows twoRoundsAgoResult)
+    public int CalculatePreviousStrikeOrSpare(int roll1, int roll2, TypesOfThrows previousRoundResult, TypesOfThrows twoRoundsAgoResult)
     {
         int StrikeSpareAddedRollScores = 0;
         if(previousRoundResult == TypesOfThrows.Strike)
@@ -58,7 +58,7 @@ public class GameLogic
         return StrikeSpareAddedRollScores;
     }
 
-    public static TypesOfThrows SetPreviousThrow(int roll1, int roll2)
+    public TypesOfThrows SetPreviousThrow(int roll1, int roll2)
     {
 
         if (roll1 < 10 && roll1 + roll2 < 10)
@@ -82,7 +82,7 @@ public class GameLogic
         }
     }
 
-    public static void SavePlayers(List<IPlayer> PlayersList)
+    public void SavePlayers(List<IPlayer> PlayersList)
     {
         using (var writer = new StreamWriter("SavedPlayers.txt"))
         {
@@ -94,7 +94,7 @@ public class GameLogic
         }
     }
 
-    public static void LoadAccounts(List<IPlayer> PlayersList)
+    public void LoadAccounts(List<IPlayer> PlayersList)
     {
         string[] SavedNames;
         if (File.Exists("SavedPlayers.txt"))
