@@ -55,15 +55,4 @@ public class Tests
         GameLogic gameLogic = new GameLogic();
         Assert.AreEqual(11, gameLogic.CalculatePreviousStrikeOrSpare(3, 5, TypesOfThrows.Strike, TypesOfThrows.Strike));
     }
-
-    // [Test]
-    // public void TestSavePlayers()
-    // {
-    //     Player TestPlayer3 = new Player("josh");
-    //     Player TestPlayer4 = new Player("Brad");
-    //     GameLogic gameLogic = new GameLogic();
-    //     TestPlayer.Clear();
-    //     TestPlayer.Add(TestPlayer3);
-    //     TestPlayer.Add(TestPlayer4);
-    // }
 }

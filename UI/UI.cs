@@ -5,12 +5,13 @@ public class Program
     public static void Main()
     {
         GameLogic gameLogic = new GameLogic();
+        storageService storageService = new storageService();
         List<IPlayer> PlayersList = new List<IPlayer>();
         Console.WriteLine("Welcome to the bowling game scorekeeper.");
         Console.WriteLine();
-        AddPlayers(PlayersList, gameLogic);
+        PlayersList = AddPlayers(PlayersList, storageService);
         GameLoop(PlayersList, gameLogic);
-        EndOfgame(PlayersList, gameLogic);
+        EndOfgame(PlayersList, storageService);
     }
 
     private static void GameLoop(List<IPlayer> PlayersList, GameLogic gameLogic)
@@ -44,8 +45,12 @@ public class Program
                         Console.WriteLine("What is the score of your second roll");
                         Console.WriteLine();
                         roll2 = GetRollScore();
+                        while(roll1 + roll2 > 10)
+                        {
+                            Console.WriteLine("Your second roll input was invalid try again. enter the score of your second roll");
+                            roll2 = GetRollScore();
+                        }
                     }
-
                     if (round == 10)
                     {
                         if (roll1 == 10 || roll1 + roll2 == 10)
@@ -69,7 +74,7 @@ public class Program
         
     }
 
-    private static void EndOfgame(List<IPlayer> PlayersList, GameLogic gameLogic)
+    private static void EndOfgame(List<IPlayer> PlayersList, storageService storageService)
     {
         Console.WriteLine("You finished the game!");
         Console.WriteLine("The final scores are:");
@@ -84,7 +89,7 @@ public class Program
         string UserInput = Console.ReadLine();
         if (UserInput == "Y")
         {
-            gameLogic.SavePlayers(PlayersList);
+            storageService.SavePlayers(PlayersList);
             PlayersList.Clear();
             Console.WriteLine("Thank you for playing. Your names have been saved. Load them next time you play");
             Console.WriteLine();
@@ -148,7 +153,7 @@ public class Program
             }
         }
     }
-    public static void AddPlayers(List<IPlayer> PlayersList, GameLogic gameLogic)
+    public static List<IPlayer> AddPlayers(List<IPlayer> PlayersList, storageService storageService)
     {
         bool Loop = true;
         while (Loop == true)
@@ -175,7 +180,7 @@ public class Program
             else if (userInput == "L")
             {
                 PlayerFactory player = new PlayerFactory();
-                gameLogic.LoadAccounts(PlayersList);
+                PlayersList = storageService.LoadPlayers();
             }
             else
             {
@@ -183,6 +188,7 @@ public class Program
                 Console.WriteLine();
             }
         }
+        return PlayersList;
     }
 
     
