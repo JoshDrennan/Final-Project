@@ -4,16 +4,48 @@ public class Program
 {
     public static void Main()
     {
-        GameLogic gameLogic = new GameLogic();
-        storageService storageService = new storageService();
-        List<IPlayer> PlayersList = new List<IPlayer>();
-        Console.WriteLine("Welcome to the bowling game scorekeeper.");
-        Console.WriteLine();
-        PlayersList = AddPlayers(PlayersList, storageService);
-        GameLoop(PlayersList, gameLogic);
-        EndOfgame(PlayersList, storageService);
+        bool loop = true;
+        while (loop = true)
+        {
+            GameLogic gameLogic = new GameLogic();
+            storageService storageService = new storageService();
+            List<IPlayer> PlayersList = new List<IPlayer>();
+            Console.WriteLine();
+            Console.WriteLine("Welcome to the bowling game scorekeeper.");
+            Console.WriteLine();
+            PlayersList = AddPlayers(PlayersList, storageService);
+            GameLoop(PlayersList, gameLogic);
+            EndOfgame(PlayersList, storageService);
+            PlayAgain(loop);
+        }
     }
 
+    public static bool PlayAgain(bool loop)
+    {
+        while (true)
+        {
+            Console.WriteLine("Would You like to play again?");
+            Console.WriteLine("Enter Y to play agian or N to end");
+            string PlayAgainInput = Console.ReadLine();
+            if (PlayAgainInput == "N")
+            {
+                Console.WriteLine("Thank you for playing!");
+                return loop = false;
+            }
+            if (PlayAgainInput == "Y")
+            {
+                Console.WriteLine("You have chose to play again enjoy!");
+                Console.WriteLine();
+                return loop = true;
+            }
+            if (PlayAgainInput != "N" || PlayAgainInput != "Y")
+            {
+                Console.WriteLine("Invalid input press Enter to try agian");
+                PlayAgainInput = Console.ReadLine();
+                Console.WriteLine();
+            }
+        }
+    }
     private static void GameLoop(List<IPlayer> PlayersList, GameLogic gameLogic)
     {
         bool loop = true;
@@ -45,7 +77,7 @@ public class Program
                         Console.WriteLine("What is the score of your second roll");
                         Console.WriteLine();
                         roll2 = GetRollScore();
-                        while(roll1 + roll2 > 10)
+                        while (roll1 + roll2 > 10)
                         {
                             Console.WriteLine("Your second roll input was invalid try again. enter the score of your second roll");
                             roll2 = GetRollScore();
@@ -71,7 +103,7 @@ public class Program
             }
             round++;
         }
-        
+
     }
 
     private static void EndOfgame(List<IPlayer> PlayersList, storageService storageService)
@@ -84,7 +116,7 @@ public class Program
             Console.WriteLine($"{p.Name}: {p.Score}");
         }
 
-        Console.WriteLine("would you like to save your names to play again? if so enter Y");
+        Console.WriteLine("would you like to save your names for next time you play? if so enter Y if not enter anything else");
         Console.WriteLine();
         string UserInput = Console.ReadLine();
         if (UserInput == "Y")
@@ -191,5 +223,5 @@ public class Program
         return PlayersList;
     }
 
-    
+
 }
