@@ -68,6 +68,7 @@ public class Program
                     Console.WriteLine("What is the score of your first roll");
                     Console.WriteLine();
                     roll1 = GetRollScore();
+                    Console.WriteLine(roll1);
                     if (roll1 == 10)
                     {
                         roll2 = 0;
@@ -94,8 +95,8 @@ public class Program
                     p.TwoRoundsAgoResult = p.PreviousRoundResult;
                     p.PreviousRoundResult = Del2(roll1, roll2);
                     loop = false;
-
-                    Console.WriteLine($"your current score is {p.Score}");
+                    Console.Clear();
+                    Console.WriteLine($"{p.Name}'s current score is {p.Score}");
                     Console.WriteLine();
                 }
 
@@ -106,32 +107,84 @@ public class Program
 
     }
 
-    private static void EndOfgame(List<IPlayer> PlayersList, storageService storageService)
+    public static int GetRollScore()
     {
-        Console.WriteLine("You finished the game!");
-        Console.WriteLine("The final scores are:");
-        Console.WriteLine();
-        foreach (var p in PlayersList)
+        string UserInput;
+        int rollScore;
+        bool success;
+        while (true)
         {
-            Console.WriteLine($"{p.Name}: {p.Score}");
+            UserInput = Console.ReadLine();
+            success = int.TryParse(UserInput, out rollScore);
+            if (success)
+            {
+                if (rollScore <= 10 && rollScore >= 0)
+                {
+                    return rollScore;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input roll score must be a number between 0 and 10 try again");
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input roll score must be a number between 0 and 10 try again");
+                Console.WriteLine();
+            }
         }
+    }
+    public static List<IPlayer> AddPlayers(List<IPlayer> PlayersList, storageService storageService)
+    {
+        bool Loop = true;
+        while (Loop == true)
+        {
+            Console.WriteLine("Press A to add players");
+            Console.WriteLine("Press D to move on");
+            Console.WriteLine("Press P to print the list of players");
+            Console.WriteLine("Press L to load names from last rounds");
 
-        Console.WriteLine("would you like to save your names for next time you play? if so enter Y if not enter anything else");
-        Console.WriteLine();
-        string UserInput = Console.ReadLine();
-        if (UserInput == "Y")
-        {
-            storageService.SavePlayers(PlayersList);
-            PlayersList.Clear();
-            Console.WriteLine("Thank you for playing. Your names have been saved. Load them next time you play");
             Console.WriteLine();
+            string userInput = Console.ReadLine();
+            if (userInput == "A")
+            {
+                PlayerFactory player = new PlayerFactory();
+                PlayersList.Add(player.Create());
+                Console.WriteLine();
+            }
+            else if (userInput == "D")
+            {
+                if (PlayersList.Count >= 1)
+                {
+                    Loop = false;
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.WriteLine("Add players to begin the game");
+                    Console.WriteLine();
+                }
+            }
+            else if (userInput == "P")
+            {
+                for (int i = 0; i < PlayersList.Count; i++)
+                {
+                    Console.WriteLine(PlayersList[i].Name);
+                }
+            }
+            else if (userInput == "L")
+            {
+                PlayerFactory player = new PlayerFactory();
+                PlayersList = storageService.LoadPlayers();
+            }
+            else
+            {
+                Console.WriteLine("Invalid input try again.");
+                Console.WriteLine();
+            }
         }
-        else
-        {
-            Console.WriteLine("Your names won't be saved. Thanks for playing");
-            Console.WriteLine();
-
-        }
+        return PlayersList;
     }
 
     public static int FinalRound(int roll1, int roll2)
@@ -168,60 +221,32 @@ public class Program
         }
         return FinalRoundStrikeOrSpareAddedRollsScore;
     }
-    public static int GetRollScore()
+
+    private static void EndOfgame(List<IPlayer> PlayersList, storageService storageService)
     {
-        int UserInput;
-        while (true)
+        Console.WriteLine("You finished the game!");
+        Console.WriteLine("The final scores are:");
+        Console.WriteLine();
+        foreach (var p in PlayersList)
         {
-            UserInput = Convert.ToInt32(Console.ReadLine());
-            if (UserInput <= 10 && UserInput >= 0)
-            {
-                return UserInput;
-            }
-            else
-            {
-                Console.WriteLine("Invalid Input roll score must be between 0 and 10 try again");
-                Console.WriteLine();
-            }
+            Console.WriteLine($"{p.Name}: {p.Score}");
         }
-    }
-    public static List<IPlayer> AddPlayers(List<IPlayer> PlayersList, storageService storageService)
-    {
-        bool Loop = true;
-        while (Loop == true)
+
+        Console.WriteLine("would you like to save your names for next time you play? if so enter Y if not enter anything else");
+        Console.WriteLine();
+        string UserInput = Console.ReadLine();
+        if (UserInput == "Y")
         {
-            Console.WriteLine("Press A to add players, press D to move on, press P to print the list of players, or press L to load names from last rounds");
+            storageService.SavePlayers(PlayersList);
+            PlayersList.Clear();
+            Console.WriteLine("Thank you for playing. Your names have been saved. Load them next time you play");
             Console.WriteLine();
-            string userInput = Console.ReadLine();
-            if (userInput == "A")
-            {
-                PlayerFactory player = new PlayerFactory();
-                PlayersList.Add(player.Create());
-            }
-            else if (userInput == "D")
-            {
-                Loop = false;
-            }
-            else if (userInput == "P")
-            {
-                for (int i = 0; i < PlayersList.Count; i++)
-                {
-                    Console.WriteLine(PlayersList[i].Name);
-                }
-            }
-            else if (userInput == "L")
-            {
-                PlayerFactory player = new PlayerFactory();
-                PlayersList = storageService.LoadPlayers();
-            }
-            else
-            {
-                Console.WriteLine("Invalid input try again.");
-                Console.WriteLine();
-            }
         }
-        return PlayersList;
+        else
+        {
+            Console.WriteLine("Your names won't be saved. Thanks for playing");
+            Console.WriteLine();
+
+        }
     }
-
-
 }
